@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+
+
+    .progress-bar {
+      position: relative;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: #4caf50;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    .button-container button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .button{
+      text-decoration: none;
+      background-color: #4caf50;
+      padding: 10px;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Customer Information</h2>
+  <h3 th:text="${customer.id+' '+customer.name +' '+customer.surname}"></h3>
+  <h2 th:text="${weekOfDay}"></h2>
+
+  <div class="nutrition-bars">
+    <div>
+      <p>Carbonhydrat</p>
+      <div class="progress-bar">
+        <div th:style="'width: ' + ${dayCarb} + '%;'" class="progress"></div>
+      </div>
+    </div>
+
+    <div>
+      <p>Protein</p>
+      <div class="progress-bar">
+        <div th:style="'width: ' + ${dayProtein} + '%;'" class="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <label >Weekly Activity Plan : </label>
+  <p th:text="${customer.weekly_activity_plan}"></p><br>
+
+  <label >Weekly Food Plan: </label>
+  <p th:text="${customer.weekly_food_plan}"></p>
+
+  <div class="buttons button-container">
+    <a class="button" th:href="@{/customer/daily-food/{customerId}/{day}(customerId=${customer.id}, day=${weekOfDay})}">Daily Food</a>
+
+  </div>
+  <form method="post" th:action="@{/customer/delete/{customerId}(customerId=${customer.id})}">
+    <button type="submit" class="button">Delete Customer</button>
+  </form>
+  
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Trainer</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    .form-container {
+      width: 400px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Edit Trainer</h1>
+
+<div class="form-container">
+  <form th:action="@{/admin/edit-trainer}" method="post">
+    <input type="hidden" th:name="trainerId" th:value="${trainer.id}" />
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" th:value="${trainer.name}" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" th:value="${trainer.surname}" required>
+
+    <button type="submit">Update Trainer</button>
+  </form>
+</div>
+
+</body>
+</html>

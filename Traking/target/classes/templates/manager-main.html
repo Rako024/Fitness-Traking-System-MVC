@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Main Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        td {
+            background-color: #9dec9f;
+        }
+
+        th {
+            background-color: #4caf50;
+        }
+        a{
+            text-decoration: none;
+        }
+        .button-delete {
+            padding: 10px;
+            background-color: #d00202;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button-delete:hover {
+            background-color: #ee3b3b;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Manager Main Page</h1>
+
+<div class="button-container">
+    <a class="button" href="/admin/c2t">Customer to Trainer</a>
+    <a class="button" href="/admin/trainer-register">Trainer Register</a>
+
+</div>
+
+<h1>Trainer List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Trainer ID</th>
+        <th>Trainer Name and Surname</th>
+        <th></th>
+        <th>Customer List</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trainer : ${trainers}">
+        <td th:text="${trainer.id}"></td>
+        <td th:text="${trainer.name + ' '+ trainer.surname}">
+
+        </td>
+        <td>
+            <a class="button" th:href="@{/admin/edit-trainer/{trainerId}(trainerId=${trainer.id})}">Edit</a>
+            <th:block th:if="${trainer.customers.isEmpty()}">
+                <form th:action="@{/admin/delete-trainer}" method="post">
+                    <input type="hidden" th:name="trainerId" th:value="${trainer.id}" />
+                    <button class="button-delete" type="submit">Delete</button>
+                </form>
+            </th:block>
+        </td>
+        <td>
+            <ul>
+                <li th:each="customer : ${trainer.customers}">
+                    <span th:text="${customer.id}"></span>
+                    <span th:text="${customer.name}"></span>
+                    <form th:action="@{/admin/dissociate-customer}" method="post">
+                        <input type="hidden" th:name="customerId" th:value="${customer.id}" />
+                        <button class="button"  type="submit">Dissociate</button>
+                    </form>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Customers without Trainer Table -->
+<h1>Customers without Trainer</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Customer ID</th>
+        <th>Customer Name</th>
+        <th></th>
+    </tr >
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td>
+            <form th:action="@{/admin/delete-customer}" method="post">
+                <input type="hidden" th:name="customerId" th:value="${customer.id}" />
+                <button class="button-delete" type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

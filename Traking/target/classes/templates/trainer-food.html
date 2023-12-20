@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Nutrition Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 48%; /* İki input'un yan yana olmasını sağlar */
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Weekly Nutrition Plan</h2>
+    <form th:action="@{/trainer/edit-food}" method="post">
+        <label for="Id">ID:</label>
+        <input type="text" id="Id" name="customerId" th:value="${customer.id}" required readonly>
+        <label for="weeklyRation">Weekly Ration:</label>
+        <textarea id="weeklyRation" name="weeklyRation" th:text="${customer.weekly_food_plan}" rows="4" required></textarea>
+
+
+        <label for="mondayCarbs">Monday Carbs:</label>
+        <input type="number" id="mondayCarbs" name="mondayCarbs" th:value="${customer.trainer_monday_carb}">
+        <label for="mondayProtein">Monday Protein:</label>
+        <input type="number" id="mondayProtein" name="mondayProtein" th:value="${customer.trainer_monday_protein}">
+
+
+        <label for="tuesdayCarbs">Tuesday Carbs:</label>
+        <input type="number" id="tuesdayCarbs" name="tuesdayCarbs" th:value="${customer.trainer_tuesday_carb}">
+        <label for="tuesdayProtein">Tuesday Protein:</label>
+        <input type="number" id="tuesdayProtein" name="tuesdayProtein" th:value="${customer.trainer_tuesday_protein}">
+
+
+        <label for="wednesdayCarbs">Wednesday Carbs:</label>
+        <input type="number" id="wednesdayCarbs" name="wednesdayCarbs" th:value="${customer.trainer_wednesday_carb}">
+        <label for="wednesdayProtein">Wednesday Protein:</label>
+        <input type="number" id="wednesdayProtein" name="wednesdayProtein" th:value="${customer.trainer_wednesday_protein}">
+
+
+        <label for="thursdayCarbs">Thursday Carbs:</label>
+        <input type="number" id="thursdayCarbs" name="thursdayCarbs" th:value="${customer.trainer_thursday_carb}">
+        <label for="thursdayProtein">Thursday Protein:</label>
+        <input type="number" id="thursdayProtein" name="thursdayProtein" th:value="${customer.trainer_thursday_protein}">
+
+
+        <label for="fridayCarbs">Friday Carbs:</label>
+        <input type="number" id="fridayCarbs" name="fridayCarbs" th:value="${customer.trainer_friday_carb}">
+        <label for="fridayProtein">Friday Protein:</label>
+        <input type="number" id="fridayProtein" name="fridayProtein" th:value="${customer.trainer_friday_protein}">
+
+
+        <label for="saturdayCarbs">Saturday Carbs:</label>
+        <input type="number" id="saturdayCarbs" name="saturdayCarbs" th:value="${customer.trainer_saturday_carb}">
+        <label for="saturdayProtein">Saturday Protein:</label>
+        <input type="number" id="saturdayProtein" name="saturdayProtein" th:value="${customer.trainer_saturday_protein}">
+
+
+        <label for="sundayCarbs">Sunday Carbs:</label>
+        <input type="number" id="sundayCarbs" name="sundayCarbs" th:value="${customer.trainer_sunday_carb}">
+        <label for="sundayProtein">Sunday Protein:</label>
+        <input type="number " id="sundayProtein" name="sundayProtein" th:value="${customer.trainer_sunday_protein}">
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

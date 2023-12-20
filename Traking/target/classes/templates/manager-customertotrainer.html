@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Interface</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Add Customer to Trainer</h2>
+  <form action="#" th:action="@{/admin/caddt}" method="post">
+    <label for="trainerId">Trainer:</label>
+    <select id="trainerId" name="trainerId" required>
+      <option th:each="trainer : ${trainers}" th:value="${trainer.id}" th:text="${trainer.id+' '+trainer.name + ' ' + trainer.surname}"></option>
+    </select>
+
+    <label for="customerId">Customer:</label>
+    <select id="customerId" name="customerId" required>
+      <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.id+' '+customer.name + ' ' + customer.surname}"></option>
+    </select>
+
+    <button type="submit">Add Customer</button>
+
+    <a th:href="@{/admin/}">
+      <button type="button">Go to Admin Page</button>
+    </a>
+  </form>
+</div>
+</body>
+</html>

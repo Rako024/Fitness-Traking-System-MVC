@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Trainer Dashboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Actions</th>
+            </tr><br><br>
+        </thead>
+
+        <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.name+' '+customer.surname}"></td>
+                <td>
+                    <a class="button" th:href="@{/trainer/food/{customerId}(customerId=${customer.id})}">Weekly Food</a>
+                    <a class="button" th:href="@{/trainer/activity/{customerId}(customerId=${customer.id})}">Weekly Activity</a>
+                </td>
+                <td>
+                    <a style="margin-left: 35px" class="button" th:href="@{/trainer/customer-info/{customerId}(customerId=${customer.id})}">View</a>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
